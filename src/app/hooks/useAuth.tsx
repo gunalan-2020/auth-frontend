@@ -37,7 +37,7 @@ export const login = async (
     );
 
     if (response.data.jwt) {
-      // cookies.set("jwt", response.data.jwt);
+      cookies.set("jwt", response.data.jwt);
     }
 
     return response.data;
