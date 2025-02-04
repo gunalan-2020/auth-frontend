@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "../api/axios";
 import { useState } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const USER_QUERY_KEY = ["user"] as const;
 
@@ -22,12 +25,23 @@ export const login = async (
   password: string,
   rememberMe: boolean
 ) => {
-  const response = await axios.post("/auth/login", {
-    email,
-    password,
-    rememberMe,
-  });
-  return response.data;
+  try {
+    const response = await axios.post("/auth/login", {
+      email,
+      password,
+      rememberMe,
+    });
+
+    if (response.data.jwt) {
+      cookies.set("jwt", response.data.jwt, {
+        maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000,
+      });
+    }
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const logout = async () => {
