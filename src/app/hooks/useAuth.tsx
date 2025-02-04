@@ -34,6 +34,11 @@ export const login = async (
 
     if (response.data.jwt) {
       cookies.set("jwt", response.data.jwt, {
+        path: "/",
+        sameSite: "none",
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+        domain: "13.233.71.117",
         maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000,
       });
     }
