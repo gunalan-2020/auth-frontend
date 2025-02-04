@@ -1,0 +1,41 @@
+/* Container for all user items */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+/* Individual user item styling */
+.user-container {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for user items */
+.user-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Email and Role styling inside each user */
+.user-container div {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Email styling (bold for clarity) */
+.user-container div:first-child {
+  font-weight: bold;
+}
+
+/* Adding a small gap between the email and role */
+.user-container div:last-child {
+  color: #777;
+  font-style: italic;
+}
