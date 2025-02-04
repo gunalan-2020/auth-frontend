@@ -37,7 +37,11 @@ export const login = async (
     );
 
     if (response.data.jwt) {
-      cookies.set("jwt", response.data.jwt);
+      cookies.set("jwt", response.data.jwt, {
+        maxAge: response.data.rememberMe
+          ? 7 * 24 * 60 * 60 * 1000
+          : 60 * 60 * 1000,
+      });
     }
 
     return response.data;
