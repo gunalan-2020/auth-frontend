@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 // Create Axios instance
 const axiosInstance = axios.create({
@@ -7,10 +8,8 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("jwt="))
-    ?.split("=")[1];
+  const cookies = new Cookies();
+  const token = cookies.get("jwt");
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
