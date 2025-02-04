@@ -26,15 +26,19 @@ export const login = async (
   rememberMe: boolean
 ) => {
   try {
-    const response = await axios.post("/auth/login", {
-      email,
-      password,
-      rememberMe,
-    });
+    const response = await axios.post(
+      "/auth/login",
+      {
+        email,
+        password,
+        rememberMe,
+      },
+      { withCredentials: true }
+    );
 
-    // if (response.data.jwt) {
-    //   cookies.set("jwt", response.data.jwt);
-    // }
+    if (response.data.jwt) {
+      // cookies.set("jwt", response.data.jwt);
+    }
 
     return response.data;
   } catch (e) {
