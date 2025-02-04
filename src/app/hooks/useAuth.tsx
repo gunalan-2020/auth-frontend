@@ -32,9 +32,9 @@ export const login = async (
       rememberMe,
     });
 
-    if (response.data.jwt) {
-      cookies.set("jwt", response.data.jwt);
-    }
+    // if (response.data.jwt) {
+    //   cookies.set("jwt", response.data.jwt);
+    // }
 
     return response.data;
   } catch (e) {
