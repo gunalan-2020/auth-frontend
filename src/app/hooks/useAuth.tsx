@@ -38,7 +38,6 @@ export const login = async (
         sameSite: "none",
         httpOnly: false,
         secure: false,
-        domain: "13.233.71.117",
         maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000,
       });
     }
