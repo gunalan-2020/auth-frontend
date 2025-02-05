@@ -7,11 +7,6 @@ const cookies = new Cookies();
 
 const USER_QUERY_KEY = ["user"] as const;
 
-export const getMe = async () => {
-  const response = await axios.get("/auth/me");
-  return response.data;
-};
-
 export const signup = async (email: string, password: string) => {
   const response = await axios.post("/user/register", {
     email,
@@ -46,7 +41,8 @@ export const login = async (
 
     return response.data;
   } catch (e) {
-    console.log(e);
+    alert(e?.response?.data?.error?.message);
+    return e;
   }
 };
 
@@ -73,7 +69,7 @@ export const useAuth = () => {
       signup(data.email, data.password),
     onError: (error: any) => {
       setErrorMessage(
-        error?.response?.data?.message || "An error occurred during signup"
+        error?.response?.data?.error?.message || "An error occurred during signup"
       );
     },
   });
@@ -91,7 +87,7 @@ export const useAuth = () => {
     },
     onError: (error: any) => {
       setErrorMessage(
-        error?.response?.data?.message || "An error occurred during login"
+        error?.response?.data?.error?.message || "An error occurred during login"
       );
     },
   });
@@ -105,7 +101,7 @@ export const useAuth = () => {
     },
     onError: (error: any) => {
       setErrorMessage(
-        error?.response?.data?.message || "An error occurred during logout"
+        error?.response?.data?.error?.message || "An error occurred during logout"
       );
     },
   });
@@ -119,7 +115,7 @@ export const useAuth = () => {
     },
     onError: (error: any) => {
       setErrorMessage(
-        error?.response?.data?.message ||
+        error?.response?.data?.error?.message ||
           "An error occurred during password reset"
       );
     },
@@ -134,7 +130,7 @@ export const useAuth = () => {
     onError: (error: any) => {
       console.error("Error verifying email:", error);
       setErrorMessage(
-        error?.response?.data?.message ||
+        error?.response?.data?.error?.message ||
           "An error occurred during email verification"
       );
     },
